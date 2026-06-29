@@ -347,4 +347,26 @@ class Page
         return $this;
     }
 
+    /**
+     * Get the robots settings formatted as a string.
+     */
+    public function getRobotsString(): ?string
+    {
+        if (empty($this->yoastHeadJson['robots'])) {
+            return null;
+        }
+
+        $robots = $this->yoastHeadJson['robots'];
+        if (\is_string($robots)) {
+            return $robots;
+        }
+
+        if (\is_array($robots)) {
+            return \implode(', ', \array_filter($robots));
+        }
+
+        return null;
+    }
+
 }
+
